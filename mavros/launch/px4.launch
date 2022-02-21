@@ -2,13 +2,15 @@
 	<!-- vim: set ft=xml noet : -->
 	<!-- example launch script for PX4 based FCU's -->
 
-	<arg name="fcu_url" default="/dev/ttyACM0:57600" />
+	<arg name="fcu_url" default="/dev/ttyTHS1:921600" />
 	<arg name="gcs_url" default="" />
 	<arg name="tgt_system" default="1" />
 	<arg name="tgt_component" default="1" />
 	<arg name="log_output" default="screen" />
 	<arg name="fcu_protocol" default="v2.0" />
 	<arg name="respawn_mavros" default="false" />
+
+	<remap from="/mavros/odometry/out" to="/vins_estimator/odometry" />
 
 	<include file="$(find mavros)/launch/node.launch">
 		<arg name="pluginlists_yaml" value="$(find mavros)/launch/px4_pluginlists.yaml" />
@@ -21,5 +23,20 @@
 		<arg name="log_output" value="$(arg log_output)" />
 		<arg name="fcu_protocol" value="$(arg fcu_protocol)" />
 		<arg name="respawn_mavros" default="$(arg respawn_mavros)" />
+		
 	</include>
+
+     <!-- <node pkg="tf" type="static_transform_publisher" name="tf_world_odom"
+           args="0.01 0.055 -0.04 0 0 0 camera odom_ned 1000"/> -->
+
+     <!-- <node pkg="tf" type="static_transform_publisher" name="tf_baseLink_world"
+           args="0.01 0.055 -0.04 0 0 0 base_link world 1000"/> -->
+
+      <!-- <node pkg="tf" type="static_transform_publisher" name="tf_odomNed_world"
+           args="0.01 0.055 -0.04 0 0 0 odom_ned world 1000"/> -->
+     
+      <!-- <node pkg="tf" type="static_transform_publisher" name="tf_world_baseLink"
+           args="0.01 0.055 -0.04 0 0 0 world base_link 1000"/> -->
+
+     
 </launch>

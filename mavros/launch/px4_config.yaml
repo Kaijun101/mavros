@@ -1,7 +1,7 @@
 # Common configuration for PX4 autopilot
 #
 # node:
-startup_px4_usb_quirk: false
+startup_px4_usb_quirk: true
 
 # --- system plugins ---
 
@@ -138,9 +138,9 @@ mission:
 #    Check http://wiki.ros.org/mavros/Enumerations
 ##
 distance_sensor:
-  hrlv_ez4_pub:
+  TF_Luna_pub: #hrlv_ez4_pub
     id: 0
-    frame_id: "hrlv_ez4_sonar"
+    frame_id: "TF_luna" #hrlv_ez4_sonar
     orientation: PITCH_270 # RPY:{0.0, 270.0, 0.0} - downward-facing
     field_of_view: 0.0  # XXX TODO
     send_tf: true
